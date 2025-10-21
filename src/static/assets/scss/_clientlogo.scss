@@ -1,0 +1,13 @@
+
+
+// clientlogo.scss
+
+
+.logo_img {
+    opacity: 0.7;
+    transition: all 0.5s;
+    &:hover {
+	    opacity: 1;
+        transform: scale(1.05);
+	}
+}

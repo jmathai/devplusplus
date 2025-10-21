@@ -1,0 +1,63 @@
+
+
+// variables.scss
+
+
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700,900");
+@font-face {
+  font-family: "Cerebri Sans,sans-serif";
+  src: url("../fonts/cerebrisans-light.eot");
+  src: local("Cerebri-sans Light"), url("../fonts/cerebrisans-light.woff") format("woff");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Cerebri Sans,sans-serif";
+  src: url("../fonts/cerebrisans-regular.eot");
+  src: local("Cerebri-sans Regular"), url("../fonts/cerebrisans-regular.woff") format("woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Cerebri Sans,sans-serif";
+  src: url("../fonts/cerebrisans-medium.eot");
+  src: local("Cerebri-sans Medium"), url("../fonts/cerebrisans-medium.woff") format("woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Cerebri Sans,sans-serif";
+  src: url("../fonts/cerebrisans-semibold.eot");
+  src: local("Cerebri-sans Semibold"), url("../fonts/cerebrisans-semibold.woff") format("woff");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Cerebri Sans,sans-serif";
+  src: url("../fonts/cerebrisans-bold.eot");
+  src: local("Cerebri-sans Bold"), url("../fonts/cerebrisans-bold.woff") format("woff");
+  font-weight: 700;
+}
+
+// Color variables
+
+$dark:#000000;
+$custom:#0ebdca;
+$custom-hover:#0ca9b5;
+$white:#ffffff;
+$blue:#4e74d6;
+$muted:#94989a;
+$gradient:linear-gradient(to right, #797cd2, #393e9e);
+$gradient-hover:linear-gradient(to right, #393e9e, #797cd2);
+
+// Base Css
+
+$h-100vh:100vh;
+$z-index:2;
+
+// Font Family
+
+$font-family: "Nunito", sans-serif;
+$font-family-secondary: "Cerebri Sans,sans-serif";
+$font-size-base:15px;
+$fw-normal:500;

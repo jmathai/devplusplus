@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="dev++ - The best way to Learn is to Launch" />
+        <meta name="keywords" content="coding, learning, development, ai tools, programming" />
+        <meta name="author" content="dev++" />
+
+        <!-- Site Title -->
+        <title>dev++ - The best way to Learn is to Launch</title>
+
+        <!-- Site favicon -->
+        <link rel="shortcut icon" href="src/static/assets/images/favicon.ico">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="src/static/assets/css/bootstrap.min.css" type="text/css">
+
+        <!-- MFP Css -->
+        <link rel="stylesheet" href="src/static/assets/css/magnific-popup.css">
+
+        <!-- Material Icon -->
+        <link rel="stylesheet" type="text/css" href="src/static/assets/css/materialdesignicons.min.css" />
+
+        <!-- Pe7 Icon -->
+        <link rel="stylesheet" type="text/css" href="src/static/assets/css/pe-icon-7.css">
+        
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+        
+        <!-- Google Sheets API -->
+        <script src="https://apis.google.com/js/api.js"></script>
+
+        <!-- Owl Slider -->
+        <link rel="stylesheet" href="src/static/assets/css/owl.carousel.css" />
+        <link rel="stylesheet" href="src/static/assets/css/owl.theme.css" />
+        <link rel="stylesheet" href="src/static/assets/css/owl.transitions.css" />
+
+        <!-- Custom  Css -->
+        <link rel="stylesheet" type="text/css" href="src/static/assets/css/style.css" />
+
+        <style>
+            .coding-experience-slider, .expertise-slider {
+                margin: 10px 0;
+            }
+            .expertise-group {
+                display: none;
+                margin-top: 15px;
+                padding: 15px;
+                border: 1px solid #e0e0e0;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+            .expertise-group.show {
+                display: block;
+            }
+            .slider-container {
+                margin: 15px 0;
+            }
+            .slider-container label {
+                font-weight: 500;
+                margin-bottom: 5px;
+                display: block;
+            }
+            .form-check {
+                margin-bottom: 10px;
+            }
+            .btn-submit {
+                position: relative;
+                min-width: 150px;
+            }
+            .spinner {
+                display: none;
+                width: 16px;
+                height: 16px;
+                border: 2px solid #ffffff;
+                border-radius: 50%;
+                border-top-color: transparent;
+                animation: spin 1s ease-in-out infinite;
+                margin-left: 10px;
+            }
+            .success-icon, .error-icon {
+                display: none;
+                margin-left: 10px;
+                font-size: 16px;
+            }
+            .success-icon {
+                color: #28a745;
+            }
+            .error-icon {
+                color: #dc3545;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            .slider-value {
+                font-weight: 600;
+                color: #ffffff !important;
+                margin-left: 10px;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+            /* Fix slider labels visibility */
+            .slider-container .d-flex small {
+                color: #ffffff !important;
+                font-weight: 500;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            }
+            /* Improve expertise group visibility */
+            .expertise-group {
+                background-color: rgba(255,255,255,0.1) !important;
+                border: 1px solid rgba(255,255,255,0.3) !important;
+            }
+            .expertise-group label {
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+            /* Terminal styling */
+            .terminal {
+                background-color: #1e1e1e;
+                border-radius: 8px;
+                padding: 20px 20px 10px 20px;
+                font-family: 'Courier New', monospace;
+                color: #d4d4d4;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                position: relative;
+                height: 350px;
+                overflow: hidden;
+            }
+            .terminal-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #333;
+            }
+            .terminal-buttons {
+                display: flex;
+                gap: 5px;
+                margin-right: 15px;
+            }
+            .terminal-button {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+            }
+            .terminal-button.red { background-color: #ff5f57; }
+            .terminal-button.yellow { background-color: #ffbd2e; }
+            .terminal-button.green { background-color: #28ca42; }
+            .terminal-title {
+                color: #8e8e93;
+                font-size: 12px;
+                flex: 1;
+                text-align: center;
+            }
+            .terminal-content {
+                font-size: 14px;
+                line-height: 1.4;
+                white-space: pre;
+            }
+            .prompt {
+                color: #7c3aed;
+                font-weight: bold;
+            }
+            .command {
+                color: #10b981;
+            }
+            .string {
+                color: #f59e0b;
+            }
+            .comment {
+                color: #6b7280;
+                font-style: italic;
+            }
+            .cursor {
+                background-color: #d4d4d4;
+                animation: blink 1s infinite;
+                display: inline-block;
+                width: 2px;
+                height: 1.2em;
+                margin-left: 2px;
+            }
+            @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+            .typing-line {
+                display: inline;
+            }
+            /* Large dev text styling with moving light effect */
+            .dev-title {
+                font-size: 3rem;
+                font-weight: bold;
+                letter-spacing: 0.1em;
+                line-height: 1.2;
+                position: relative;
+            }
+            .dev-title .animate {
+                background: linear-gradient(90deg, 
+                    #FFFFFF 0%,
+                    #FFFFFF 20%,
+                    #FFD700 40%,
+                    #FF6B35 50%,
+                    #F7931E 60%,
+                    #FFFFFF 80%,
+                    #FFFFFF 100%);
+                background-size: 300% 100%;
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                animation: lightSweep 3s ease-in-out infinite;
+            }
+            
+            @keyframes lightSweep {
+                0% { 
+                    background-position: -100% 0;
+                }
+                100% { 
+                    background-position: 100% 0;
+                }
+            }
+            
+            /* Mobile responsive styles */
+            @media (max-width: 768px) {
+                .header_title {
+                    font-size: 35px !important;
+                }
+            }
+        </style>
+
+    </head>    
+    <body>
+
+        <!-- loader -->
+        <div class="loader-wrapper">
+            <div class="loader"></div>
+        </div>
+
+        <!--Start Home-->
+        <section class="home-bg home_side_img" id="home" style="padding-top: 10px;">
+            <div class="container">
+                <div class="row vertical-content">
+                    <div class="col-lg-6">
+                        <div class="text-white">
+                            <div class="dev-title mb-4">
+                              dev<span class="animate">++</span>
+                            </div>
+                            <h1 class="header_title mx-auto mt-4 mb-0 fw-normal">The best way to <span class="fw-bold">Learn</span><br>Is to <span class="fw-bold">Launch</span></h1>
+                            <p class="header_subtitle pt-4 mb-0 pb-2 text-white">
+                              This isn't your typical online course where you learn abstract concepts and tools.
+                              You'll launch an MVP of your idea or a new feature in just 2 weeks.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mt-3">
+                            <div class="terminal">
+                                <div class="terminal-header">
+                                    <div class="terminal-buttons">
+                                        <div class="terminal-button red"></div>
+                                        <div class="terminal-button yellow"></div>
+                                        <div class="terminal-button green"></div>
+                                    </div>
+                                    <div class="terminal-title">~/dev++/project</div>
+                                </div>
+                                <div class="terminal-content" id="terminal-content">
+                                    <div id="static-content"></div>
+<span id="typing-line" class="typing-line"></span><span class="cursor" id="cursor"></span>
+                                </div>
+                            </div>
+                        </div>                                
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Home-->
+
+        <!-- Start Feature Highlights -->
+        <section class="section mt-2 mb-0" id="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="about_boxes mt-3 text-center rounded p-4">
+                            <div class="about_icon">
+                                <i class="mdi mdi-code-tags text-custom"></i>
+                            </div>
+                            <div class="about_content mt-4">
+                                <h5 class="fw-bold">Learn by Doing</h5>
+                                <p class="text-muted mb-0 mt-3">Apply what you learn in real time to your own idea or feature.</p>
+                                <!--<div class="mt-3 about_btn">
+                                    <a href="javascript:void(0)"><i class="mdi mdi-arrow-right"></i></a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="about_boxes active mt-3 text-center rounded p-4">
+                            <div class="about_icon">
+                                <i class="mdi mdi-rocket text-custom"></i>
+                            </div>
+                            <div class="about_content mt-4">
+                                <h5 class="fw-bold">Launch & Share</h5>
+                                <p class="text-muted mb-0 mt-3">Launch your idea or feature to your users and get feedback quickly.</p>
+                                <!--<div class="mt-3 about_btn">
+                                    <a href="javascript:void(0)"><i class="mdi mdi-arrow-right"></i></a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="about_boxes mt-3 text-center rounded p-4">
+                            <div class="about_icon">
+                                <i class="mdi mdi-account-group text-custom"></i>
+                            </div>
+                            <div class="about_content mt-4">
+                                <h5 class="fw-bold">Community Support</h5>
+                                <p class="text-muted mb-0 mt-3">Learn from others who have done it already and supercharge your knowledge.</p>
+                                <!--<div class="mt-3 about_btn">
+                                    <a href="javascript:void(0)"><i class="mdi mdi-arrow-right"></i></a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Feature Highlights -->
+
+        <!-- Start User Interest Form -->
+        <section class="section bg-light mt-2" id="interest-form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section_title text-center">
+                            <div class="section_title_icon">
+                                <i class="mdi mdi-account-plus"></i>
+                            </div>
+                            <h3 class="mt-3 text-capitalize fw-bold">Interested in Joining?</h3>
+                            <p class="text-muted section_subtitle mx-auto">Classes start every 2 weeks and we'd love to learn more about your experience to provide you with the optimal learning path.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="mt-3 contact_form bg-gradient mx-auto">
+                            <div id="message"></div>
+                            <form id="interest-form-element" name="interest-form" novalidate>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-2">
+                                            <label for="name" class="text-white">Name *</label>
+                                            <input name="name" id="name" type="text" class="form-control" placeholder="Your name..." required>
+                                            <div class="invalid-feedback">Please enter your name.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-2">
+                                            <label for="email" class="text-white">Email *</label>
+                                            <input name="email" id="email" type="email" class="form-control" placeholder="Your email..." required>
+                                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group mt-2">
+                                            <label for="invite-code" class="text-white">Invite Code (Optional)</label>
+                                            <input name="invite-code" id="invite-code" type="text" class="form-control" placeholder="Enter invite code if you have one...">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Coding Experience Slider -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group mt-3">
+                                            <label for="coding-experience" class="text-white">Coding Experience</label>
+                                            <div class="slider-container">
+                                                <input type="range" class="form-range coding-experience-slider" id="coding-experience" name="coding-experience" min="1" max="4" value="1">
+                                                <div class="d-flex justify-content-between text-white">
+                                                    <small>1 year</small>
+                                                    <small>5 years</small>
+                                                    <small>10 years</small>
+                                                    <small>20+ years</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- AI Tools Used -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group mt-3">
+                                            <label class="text-white">Which AI Tools Used for Coding? (Check all that apply)</label>
+                                            <div class="mt-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input ai-tool-checkbox" type="checkbox" value="chatbots" id="chatbots" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="chatbots">
+                                                        Chatbots (ChatGPT, Gemini)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input ai-tool-checkbox" type="checkbox" value="ides" id="ides" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="ides">
+                                                        IDEs (Cursor, Windsurf)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input ai-tool-checkbox" type="checkbox" value="agents" id="agents" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="agents">
+                                                        Coding Agents (Claude Code, Codex)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input ai-tool-checkbox" type="checkbox" value="vibe" id="vibe" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="vibe">
+                                                        Vibe coding (Lovable, v0, Replit)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dynamic Expertise Sliders -->
+                                <div id="expertise-sections">
+                                    <!-- Chatbots Expertise -->
+                                    <div class="expertise-group" id="chatbots-expertise">
+                                        <label class="text-white">Chatbots Expertise Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="chatbots-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- IDEs Expertise -->
+                                    <div class="expertise-group" id="ides-expertise">
+                                        <label class="text-white">IDEs Expertise Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="ides-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Agents Expertise -->
+                                    <div class="expertise-group" id="agents-expertise">
+                                        <label class="text-white">Coding Agents Expertise Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="agents-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Vibe coding Expertise -->
+                                    <div class="expertise-group" id="vibe-expertise">
+                                        <label class="text-white">Vibe Coding Expertise Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="vibe-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 mt-4 text-end">
+                                        <button type="submit" id="submit" class="btn btn-custom btn-submit">
+                                            Submit Your Interest
+                                            <div class="spinner" id="submit-spinner"></div>
+                                            <i class="mdi mdi-check success-icon" id="success-icon"></i>
+                                            <i class="mdi mdi-alert-circle error-icon" id="error-icon"></i>
+                                        </button>
+                                        <div id="form-message" class="mt-2"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End User Interest Form -->
+
+        <!-- Start Footer -->
+        <footer class="footer py-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <div class="footer_detail">
+                                <!--<p class="footer_desc mx-auto mb-0 mt-3">The best way to learn is to launch. Build, deploy, and share your projects with the developer community.</p>-->
+                                <div class="fot_div"></div>
+                                <div>
+                                    <p class="copy-right">
+                                     Built with dev++. <script>document.write(new Date().getFullYear())</script> &copy;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+        <!-- Back To Top -->    
+        <a href="#" class="back_top"> <i class="mdi mdi-chevron-up"> </i> </a>
+
+        <!-- Javascript -->
+        <script src="src/static/assets/js/jquery.min.js"></script>
+        <script src="src/static/assets/js/popper.min.js"></script>
+        <script src="src/static/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="src/static/assets/js/jquery.easing.min.js"></script>
+        <script src="src/static/assets/js/scrollspy.min.js"></script>
+
+        <!-- Owl Js -->
+        <script src="src/static/assets/js/owl.carousel.min.js"></script>
+        
+        <!-- MFP JS -->
+        <script src="src/static/assets/js/jquery.magnific-popup.min.js"></script>
+
+        <!-- Custom Js   -->
+        <script src="src/static/assets/js/custom.js"></script>
+
+        <script>
+            // Google Apps Script Web App URL (replace with your deployed URL)
+            const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYEBSV5Xj_5W6BNfsoGENuzsD9vnrD2gELFxpA0VYPhuNennVH5ocJp6TrY_XhC8l6/exec';
+            
+            function submitToGoogleSheets(formData) {
+                // Use GET request with URL parameters to avoid CORS preflight
+                const params = new URLSearchParams({
+                    data: JSON.stringify(formData)
+                });
+                
+                return fetch(`${APPS_SCRIPT_URL}?${params}`, {
+                    method: 'GET',
+                    mode: 'cors'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        return data;
+                    } else {
+                        throw new Error(data.error || 'Unknown error occurred');
+                    }
+                });
+            }
+            
+            $(document).ready(function() {
+                // Terminal typing animation - Complete AI workflow
+                const terminalSteps = [
+                    { type: 'command', content: '<span class="prompt">$</span> <span class="command">codex</span> <span class="string">"help me write unit tests"</span>' },
+                    { type: 'response', content: '<span class="comment"># 🤖 Generated test suite with 15 test cases</span>' },
+                    { type: 'dots', content: '<span class="comment">...</span>' },
+                    
+                    { type: 'command', content: '<span class="prompt">$</span> <span class="command">claude</span> <span class="string">"review my API design"</span>' },
+                    { type: 'response', content: '<span class="comment"># 🤖 Great structure! Consider adding pagination</span>' },
+                    { type: 'dots', content: '<span class="comment">...</span>' },
+                    
+                    { type: 'command', content: '<span class="prompt">$</span> <span class="command">npm</span> <span class="string">run</span> <span class="string">build</span>' },
+                    { type: 'command', content: '<span class="prompt">$</span> <span class="command">vercel</span> <span class="string">deploy</span>' },
+                    { type: 'final', content: '<span class="comment"># Don\'t just learn. Launch! 🚀</span>' }
+                ];
+                
+                let currentStepIndex = 0;
+                let currentCharIndex = 0;
+                const staticContent = document.getElementById('static-content');
+                const typingLine = document.getElementById('typing-line');
+                
+                function typeTerminalWorkflow() {
+                    if (currentStepIndex >= terminalSteps.length) {
+                        // Animation complete, stop here and leave content visible
+                        return;
+                    }
+                    
+                    const currentStep = terminalSteps[currentStepIndex];
+                    const textContent = currentStep.content;
+                    
+                    // Create a temporary div to extract plain text length
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = textContent;
+                    const plainText = tempDiv.textContent || tempDiv.innerText || '';
+                    
+                    if (currentCharIndex < plainText.length) {
+                        // Still typing current line
+                        const tempDiv2 = document.createElement('div');
+                        tempDiv2.innerHTML = textContent;
+                        const textToShow = plainText.substring(0, currentCharIndex + 1);
+                        
+                        // Rebuild HTML with partial text
+                        if (currentStep.type === 'command') {
+                            const parts = plainText.split(' ');
+                            let rebuiltContent = '<span class="prompt">$</span>';
+                            let charCount = 1; // for the $
+                            
+                            for (let i = 1; i < parts.length && charCount < textToShow.length; i++) {
+                                if (i === 1) {
+                                    rebuiltContent += ' <span class="command">' + parts[i].substring(0, Math.max(0, textToShow.length - charCount - 1)) + '</span>';
+                                } else {
+                                    const remainingChars = textToShow.length - charCount - 1;
+                                    if (remainingChars > 0) {
+                                        rebuiltContent += ' <span class="string">' + parts.slice(i).join(' ').substring(0, remainingChars) + '</span>';
+                                        break;
+                                    }
+                                }
+                                charCount += parts[i].length + 1;
+                            }
+                            typingLine.innerHTML = rebuiltContent;
+                        } else {
+                            typingLine.innerHTML = '<span class="comment">' + textToShow + '</span>';
+                        }
+                        
+                        currentCharIndex++;
+                        setTimeout(typeTerminalWorkflow, currentStep.type === 'dots' ? 200 : 80);
+                    } else {
+                        // Finished typing current line, move it to static content
+                        staticContent.innerHTML += textContent + '\n';
+                        typingLine.innerHTML = '';
+                        currentCharIndex = 0;
+                        currentStepIndex++;
+                        
+                        const delay = currentStep.type === 'final' ? 3000 : 
+                                     currentStep.type === 'dots' ? 800 : 1200;
+                        setTimeout(typeTerminalWorkflow, delay);
+                    }
+                }
+                
+                // Start terminal animation
+                setTimeout(typeTerminalWorkflow, 1500);
+                
+                
+                // Coding experience slider values (no longer need to update display)
+                const experienceLabels = ['1 year', '5 years', '10 years', '20+ years'];
+                
+                // Expertise level slider values (no longer need to update display)
+                const expertiseLabels = ['Novice', 'Intermediate', 'Expert'];
+
+                // Show/hide expertise sections based on checkbox selection
+                $('.ai-tool-checkbox').change(function() {
+                    const toolType = $(this).val();
+                    const expertiseSection = $('#' + toolType + '-expertise');
+                    
+                    if ($(this).is(':checked')) {
+                        expertiseSection.addClass('show');
+                    } else {
+                        expertiseSection.removeClass('show');
+                    }
+                });
+
+                // Form submission
+                $('#interest-form-element').on('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Reset previous states
+                    $('.form-control').removeClass('is-invalid');
+                    $('#submit-spinner').hide();
+                    $('#success-icon').hide();
+                    $('#error-icon').hide();
+                    $('#form-message').html('');
+                    
+                    // Basic validation
+                    let isValid = true;
+                    
+                    const name = $('#name').val().trim();
+                    const email = $('#email').val().trim();
+                    
+                    if (!name) {
+                        $('#name').addClass('is-invalid');
+                        isValid = false;
+                    }
+                    
+                    if (!email || !isValidEmail(email)) {
+                        $('#email').addClass('is-invalid');
+                        isValid = false;
+                    }
+                    
+                    if (!isValid) {
+                        return;
+                    }
+                    
+                    // Show spinner
+                    $('#submit-spinner').show();
+                    
+                    // Collect form data
+                    const formData = {
+                        name: name,
+                        email: email,
+                        invite_code: $('#invite-code').val().trim(),
+                        coding_experience: experienceLabels[$('#coding-experience').val() - 1],
+                        ai_tools_used: [],
+                        ai_tool_expertise: {}
+                    };
+                    
+                    // Collect checked AI tools and their expertise levels
+                    $('.ai-tool-checkbox:checked').each(function() {
+                        const toolType = $(this).val();
+                        formData.ai_tools_used.push($(this).next('label').text().trim());
+                        
+                        const expertiseSlider = $('input[name="' + toolType + '-expertise"]');
+                        if (expertiseSlider.length) {
+                            formData.ai_tool_expertise[toolType] = expertiseLabels[expertiseSlider.val() - 1];
+                        }
+                    });
+                    
+                    // Submit form data to Google Sheets
+                    submitToGoogleSheets(formData)
+                        .then(response => {
+                            $('#submit-spinner').hide();
+                            $('#success-icon').show();
+                            $('#form-message').html('<div class="alert alert-success">Thank you! Your interest has been submitted successfully.</div>');
+                            $('#interest-form-element')[0].reset();
+                            $('.expertise-group').removeClass('show');
+                        })
+                        .catch(error => {
+                            console.error('Submission error:', error);
+                            $('#submit-spinner').hide();
+                            $('#error-icon').show();
+                            $('#form-message').html('<div class="alert alert-danger">Sorry, there was an error submitting your form. Please try again.</div>');
+                        });
+                });
+                
+                function isValidEmail(email) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return emailRegex.test(email);
+                }
+            });
+        </script>
+
+    </body>
+</html>
