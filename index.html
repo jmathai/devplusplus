@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="description" content="dev++ - The best way to Learn is to Launch" />
         <meta name="keywords" content="coding, learning, development, ai tools, programming" />
         <meta name="author" content="dev++" />
@@ -80,11 +80,19 @@
                 border-top-color: transparent;
                 animation: spin 1s ease-in-out infinite;
                 margin-left: 10px;
+                vertical-align: middle;
+            }
+            .spinner.show {
+                display: inline-block;
             }
             .success-icon, .error-icon {
                 display: none;
                 margin-left: 10px;
                 font-size: 16px;
+                vertical-align: middle;
+            }
+            .success-icon.show, .error-icon.show {
+                display: inline-block;
             }
             .success-icon {
                 color: #28a745;
@@ -197,35 +205,56 @@
                 line-height: 1.2;
                 position: relative;
             }
+            .dev-title .dev-sub-title {
+                letter-spacing: .05em;
+                font-size: 25%;
+                font-weight: normal;
+            }
             .dev-title .animate {
                 background: linear-gradient(90deg, 
                     #FFFFFF 0%,
-                    #FFFFFF 20%,
-                    #FFD700 40%,
+                    #FFFFFF 30%,
+                    #FFD700 45%,
                     #FF6B35 50%,
-                    #F7931E 60%,
-                    #FFFFFF 80%,
+                    #F7931E 55%,
+                    #FFFFFF 70%,
                     #FFFFFF 100%);
-                background-size: 300% 100%;
+                background-size: 500% 100%;
                 background-clip: text;
                 -webkit-background-clip: text;
                 color: transparent;
-                animation: lightSweep 3s ease-in-out infinite;
+                animation: lightSweep 25s ease-in-out infinite;
             }
             
             @keyframes lightSweep {
                 0% { 
-                    background-position: -100% 0;
+                    background-position: -200% 0;
+                }
+                50% { 
+                    background-position: 200% 0;
                 }
                 100% { 
-                    background-position: 100% 0;
+                    background-position: -200% 0;
                 }
+            }
+            
+            .header_title {
+              text-transform: none;
+            }
+            .header_subtitle span a {
+                display: block;
+                color: white;
+                text-decoration: underline !important;
+            }
+            .header_subtitle a:hover {
+                color: white;
+                text-decoration: underline;
             }
             
             /* Mobile responsive styles */
             @media (max-width: 768px) {
                 .header_title {
-                    font-size: 35px !important;
+                    font-size: 34px !important;
                 }
             }
         </style>
@@ -246,11 +275,13 @@
                         <div class="text-white">
                             <div class="dev-title mb-4">
                               dev<span class="animate">++</span>
+                              <div class="dev-sub-title"><span class="animate">50x</span> your productivity with AI. No, really.</div>
                             </div>
                             <h1 class="header_title mx-auto mt-4 mb-0 fw-normal">The best way to <span class="fw-bold">Learn</span><br>Is to <span class="fw-bold">Launch</span></h1>
                             <p class="header_subtitle pt-4 mb-0 pb-2 text-white">
                               This isn't your typical online course where you learn abstract concepts and tools.
                               You'll launch an MVP of your idea or a new feature in just 2 weeks.
+                              <span class="mt-1"><a href="#faq">Learn more</a></span>
                             </p>
                         </div>
                     </div>
@@ -500,6 +531,163 @@
         </section>
         <!-- End User Interest Form -->
 
+        <!-- Start FAQ Section -->
+        <section class="section" id="faq">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section_title text-center">
+                            <div class="section_title_icon">
+                                <i class="mdi mdi-help-circle"></i>
+                            </div>
+                            <h3 class="mt-3 text-capitalize fw-bold">Frequently Asked Questions</h3>
+                            <p class="text-muted section_subtitle mx-auto">Not convinced? Neither were we, at first.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq1">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                        How can AI tools really increase my productivity by 10-50x?
+                                    </button>
+                                </h2>
+                                <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        We've documented real developers achieving 10-50x productivity gains by mastering the right AI tools and workflow. Tasks that used to take days now take hours, and hours-long work gets done in minutes. You'll learn to use AI for code generation, debugging, architecture planning, testing, and deployment - transforming how you build software.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq2">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                        Do you have proof of these productivity improvements?
+                                    </button>
+                                </h2>
+                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                      Yes. We've tracked developers who went from taking 3 weeks to build a feature to shipping it in 2 days. Others have reduced debugging time from hours to minutes. <a href="https://getpreppy.app">Preppy</a> was created in under a week using the dev++ process.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq3">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                        What specific AI tools will I master?
+                                    </button>
+                                </h2>
+                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                      It's less about the tools and more about the process. dev++ won't expose you to all of the AI tools available. Instead, you'll learn a versatile workflow that is all you'll need to 50x your productivity. But since you asked: <strong>Claude Skills</strong>, <strong>Claude Code</strong>, <strong>ChatGPT</strong> are the bedrock of the dev++ process.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq4">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                        How long does each cohort last?
+                                    </button>
+                                </h2>
+                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Each dev++ cohort runs for exactly 2 weeks. This isn't a 6-month course with theory - it's an intensive sprint where you'll ship a real product while learning the most effective AI workflows. New cohorts start every 2 weeks.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 5 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq5">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                        Is this course theory-heavy or hands-on?
+                                    </button>
+                                </h2>
+                                <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        100% hands-on and pragmatic. We skip the academic lectures and dive straight into building. You'll work on your own project idea from day one, getting real results immediately. Our goal is to enable you as a developer, not educate you about AI theory.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 6 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq6">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                        What if I'm already using some AI tools?
+                                    </button>
+                                </h2>
+                                <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Perfect! You'll learn advanced workflows and tool combinations that most developers never discover. We'll show you how to chain tools together, when to use each one, and the specific prompting techniques that unlock their full power. Even experienced AI tool users see dramatic improvements.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 7 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq7">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                        What kind of project will I build?
+                                    </button>
+                                </h2>
+                                <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="faq7" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You bring your own idea. - whether it's a new web app, API, or new feature for an existing project. We'll help you scope it to be achievable in 2 weeks while still being meaningful.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq8">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                        Why choose dev++ over other AI coding courses?
+                                    </button>
+                                </h2>
+                                <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="faq8" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Other courses teach you about AI. We make you dangerously productive with it. While competitors focus on single tools or theory, we teach the complete workflow that professional developers use to ship faster than ever before. You'll leave with a launched product and transformative skills.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq9">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                                        What's the time commitment?
+                                    </button>
+                                </h2>
+                                <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="faq9" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Plan for 10-15 hours per week - but it won't feel like traditional studying. You'll be building something you care about with cutting-edge tools that make development addictively fast. Most participants report working more than required because the process is so engaging.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 10 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq10">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                                        What happens after the 2 weeks?
+                                    </button>
+                                </h2>
+                                <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="faq10" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You'll have a shipped product, transformative development skills, and access to our alumni community. Many participants continue building on what they started, launch successful products, or apply their new AI-powered workflow to dramatically accelerate their day job. The skills compound forever.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End FAQ Section -->
+
         <!-- Start Footer -->
         <footer class="footer py-2">
             <div class="container">
@@ -521,9 +709,6 @@
             </div>
         </footer>
         <!-- End Footer -->
-
-        <!-- Back To Top -->    
-        <a href="#" class="back_top"> <i class="mdi mdi-chevron-up"> </i> </a>
 
         <!-- Javascript -->
         <script src="src/static/assets/js/jquery.min.js"></script>
@@ -569,16 +754,16 @@
                 // Terminal typing animation - Complete AI workflow
                 const terminalSteps = [
                     { type: 'command', content: '<span class="prompt">$</span> <span class="command">codex</span> <span class="string">"help me write unit tests"</span>' },
-                    { type: 'response', content: '<span class="comment"># 🤖 Generated test suite with 15 test cases</span>' },
+                    { type: 'response', content: '<span class="comment"># 🤖 Generated 9 test cases. Take a look!</span>' },
                     { type: 'dots', content: '<span class="comment">...</span>' },
                     
                     { type: 'command', content: '<span class="prompt">$</span> <span class="command">claude</span> <span class="string">"review my API design"</span>' },
-                    { type: 'response', content: '<span class="comment"># 🤖 Great structure! Consider adding pagination</span>' },
+                    { type: 'response', content: '<span class="comment"># 🤖 Looks good. Can I add pagination?</span>' },
                     { type: 'dots', content: '<span class="comment">...</span>' },
                     
                     { type: 'command', content: '<span class="prompt">$</span> <span class="command">npm</span> <span class="string">run</span> <span class="string">build</span>' },
                     { type: 'command', content: '<span class="prompt">$</span> <span class="command">vercel</span> <span class="string">deploy</span>' },
-                    { type: 'final', content: '<span class="comment"># Don\'t just learn. Launch! 🚀</span>' }
+                    { type: 'final', content: '<span class="comment"># Don\'t just learn. <a href=\"#interest-form\">Launch!</a> 🚀</span>' }
                 ];
                 
                 let currentStepIndex = 0;
@@ -672,9 +857,9 @@
                     
                     // Reset previous states
                     $('.form-control').removeClass('is-invalid');
-                    $('#submit-spinner').hide();
-                    $('#success-icon').hide();
-                    $('#error-icon').hide();
+                    $('#submit-spinner').removeClass('show');
+                    $('#success-icon').removeClass('show');
+                    $('#error-icon').removeClass('show');
                     $('#form-message').html('');
                     
                     // Basic validation
@@ -698,7 +883,7 @@
                     }
                     
                     // Show spinner
-                    $('#submit-spinner').show();
+                    $('#submit-spinner').addClass('show');
                     
                     // Collect form data
                     const formData = {
@@ -724,16 +909,16 @@
                     // Submit form data to Google Sheets
                     submitToGoogleSheets(formData)
                         .then(response => {
-                            $('#submit-spinner').hide();
-                            $('#success-icon').show();
-                            $('#form-message').html('<div class="alert alert-success">Thank you! Your interest has been submitted successfully.</div>');
+                            $('#submit-spinner').removeClass('show');
+                            $('#success-icon').addClass('show');
+                            $('#form-message').html('<div class="alert alert-success">Got it! We will reach out within 48 hours.</div>');
                             $('#interest-form-element')[0].reset();
                             $('.expertise-group').removeClass('show');
                         })
                         .catch(error => {
                             console.error('Submission error:', error);
-                            $('#submit-spinner').hide();
-                            $('#error-icon').show();
+                            $('#submit-spinner').removeClass('show');
+                            $('#error-icon').addClass('show');
                             $('#form-message').html('<div class="alert alert-danger">Sorry, there was an error submitting your form. Please try again.</div>');
                         });
                 });
