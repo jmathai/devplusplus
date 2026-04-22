@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="description" content="dev++ for Business - Automate your workflows with AI" />
+        <meta name="keywords" content="ai, business, automation, claude, productivity, workflows" />
+        <meta name="author" content="dev++" />
+
+        <!-- Site Title -->
+        <title>dev++ for Business - Automate Your Workflows with AI</title>
+
+        <!-- Site favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="../static/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../static/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon/favicon-16x16.png">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="../src/static/assets/css/bootstrap.min.css" type="text/css">
+
+        <!-- MFP Css -->
+        <link rel="stylesheet" href="../src/static/assets/css/magnific-popup.css">
+
+        <!-- Material Icon -->
+        <link rel="stylesheet" type="text/css" href="../src/static/assets/css/materialdesignicons.min.css" />
+
+        <!-- Pe7 Icon -->
+        <link rel="stylesheet" type="text/css" href="../src/static/assets/css/pe-icon-7.css">
+
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+        <!-- Google Sheets API -->
+        <script src="https://apis.google.com/js/api.js"></script>
+
+        <!-- Owl Slider -->
+        <link rel="stylesheet" href="../src/static/assets/css/owl.carousel.css" />
+        <link rel="stylesheet" href="../src/static/assets/css/owl.theme.css" />
+        <link rel="stylesheet" href="../src/static/assets/css/owl.transitions.css" />
+
+        <!-- Custom  Css -->
+        <link rel="stylesheet" type="text/css" href="../src/static/assets/css/style.css" />
+
+        <style>
+            .expertise-group {
+                display: none;
+                margin-top: 15px;
+                padding: 15px;
+                border: 1px solid #e0e0e0;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+            .expertise-group.show {
+                display: block;
+            }
+            .slider-container {
+                margin: 15px 0;
+            }
+            .slider-container label {
+                font-weight: 500;
+                margin-bottom: 5px;
+                display: block;
+            }
+            .form-check {
+                margin-bottom: 10px;
+            }
+            .btn-submit {
+                position: relative;
+                min-width: 150px;
+            }
+            .spinner {
+                display: none;
+                width: 16px;
+                height: 16px;
+                border: 2px solid #ffffff;
+                border-radius: 50%;
+                border-top-color: transparent;
+                animation: spin 1s ease-in-out infinite;
+                margin-left: 10px;
+                vertical-align: middle;
+            }
+            .spinner.show {
+                display: inline-block;
+            }
+            .success-icon, .error-icon {
+                display: none;
+                margin-left: 10px;
+                font-size: 16px;
+                vertical-align: middle;
+            }
+            .success-icon.show, .error-icon.show {
+                display: inline-block;
+            }
+            .success-icon {
+                color: #28a745;
+            }
+            .error-icon {
+                color: #dc3545;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            .slider-value {
+                font-weight: 600;
+                color: #ffffff !important;
+                margin-left: 10px;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+            /* Fix slider labels visibility */
+            .slider-container .d-flex small {
+                color: #ffffff !important;
+                font-weight: 500;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            }
+            /* Improve expertise group visibility */
+            .expertise-group {
+                background-color: rgba(255,255,255,0.1) !important;
+                border: 1px solid rgba(255,255,255,0.3) !important;
+            }
+            .expertise-group label {
+                color: #ffffff !important;
+                font-weight: 600 !important;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+            /* Demo container - crossfade between terminal and chat */
+            .demo-container {
+                position: relative;
+                height: 350px;
+            }
+            .demo-view {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                transition: opacity 1.2s ease-in-out;
+            }
+            .demo-view.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            /* Chat window styling */
+            .chat-window {
+                background-color: #f9f9fb;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                height: 350px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+            .chat-header {
+                display: flex;
+                align-items: center;
+                padding: 10px 16px;
+                background: #1a1a2e;
+                border-bottom: 1px solid #e5e5e5;
+            }
+            .chat-header-buttons {
+                display: flex;
+                gap: 5px;
+                margin-right: 12px;
+            }
+            .chat-header-button {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+            }
+            .chat-header-button.red { background-color: #ff5f57; }
+            .chat-header-button.yellow { background-color: #ffbd2e; }
+            .chat-header-button.green { background-color: #28ca42; }
+            .chat-header-title {
+                font-size: 13px;
+                font-weight: 600;
+                color: #d4a574;
+                flex: 1;
+                text-align: center;
+            }
+            .chat-messages {
+                flex: 1;
+                padding: 16px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .chat-msg {
+                max-width: 80%;
+                padding: 10px 14px;
+                border-radius: 16px;
+                font-size: 13px;
+                line-height: 1.4;
+                opacity: 0;
+                transform: translateY(8px);
+                transition: opacity 0.4s ease, transform 0.4s ease;
+            }
+            .chat-msg.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .chat-msg.user {
+                align-self: flex-end;
+                background: #7c3aed;
+                color: #fff;
+                border-bottom-right-radius: 4px;
+            }
+            .chat-msg.claude {
+                align-self: flex-start;
+                background: #fff;
+                color: #333;
+                border: 1px solid #e5e5e5;
+                border-bottom-left-radius: 4px;
+            }
+            .chat-msg.claude .claude-label {
+                font-size: 11px;
+                font-weight: 600;
+                color: #d4a574;
+                margin-bottom: 4px;
+            }
+            .chat-input {
+                padding: 10px 16px;
+                border-top: 1px solid #e5e5e5;
+                background: #fff;
+            }
+            .chat-input-field {
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                font-size: 13px;
+                color: #999;
+                background: #f5f5f5;
+                outline: none;
+            }
+
+            /* Terminal styling */
+            .terminal {
+                background-color: #1e1e1e;
+                border-radius: 8px;
+                padding: 20px 20px 10px 20px;
+                font-family: 'Courier New', monospace;
+                color: #d4d4d4;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                position: relative;
+                height: 350px;
+                overflow: hidden;
+            }
+            .terminal-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #333;
+            }
+            .terminal-buttons {
+                display: flex;
+                gap: 5px;
+                margin-right: 15px;
+            }
+            .terminal-button {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+            }
+            .terminal-button.red { background-color: #ff5f57; }
+            .terminal-button.yellow { background-color: #ffbd2e; }
+            .terminal-button.green { background-color: #28ca42; }
+            .terminal-title {
+                color: #8e8e93;
+                font-size: 12px;
+                flex: 1;
+                text-align: center;
+            }
+            .terminal-content {
+                font-size: 14px;
+                line-height: 1.4;
+                white-space: pre;
+            }
+            .prompt {
+                color: #7c3aed;
+                font-weight: bold;
+            }
+            .command {
+                color: #10b981;
+            }
+            .string {
+                color: #f59e0b;
+            }
+            .comment {
+                color: #6b7280;
+                font-style: italic;
+            }
+            .cursor {
+                background-color: #d4d4d4;
+                animation: blink 1s infinite;
+                display: inline-block;
+                width: 2px;
+                height: 1.2em;
+                margin-left: 2px;
+            }
+            @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+            .typing-line {
+                display: inline;
+            }
+            /* Large dev text styling with moving light effect */
+            .dev-title {
+                font-size: 3rem;
+                font-weight: bold;
+                letter-spacing: 0.1em;
+                line-height: 1.2;
+                position: relative;
+            }
+            .dev-title .dev-sub-title {
+                letter-spacing: .05em;
+                font-size: 25%;
+                font-weight: normal;
+            }
+            .dev-title .animate {
+                background: linear-gradient(90deg,
+                    #FFFFFF 0%,
+                    #FFFFFF 30%,
+                    #FFD700 45%,
+                    #FF6B35 50%,
+                    #F7931E 55%,
+                    #FFFFFF 70%,
+                    #FFFFFF 100%);
+                background-size: 500% 100%;
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                animation: lightSweep 25s ease-in-out infinite;
+            }
+
+            @keyframes lightSweep {
+                0% {
+                    background-position: -200% 0;
+                }
+                50% {
+                    background-position: 200% 0;
+                }
+                100% {
+                    background-position: -200% 0;
+                }
+            }
+
+            .header_title {
+              text-transform: none;
+            }
+            .header_subtitle span a {
+                display: block;
+                color: white;
+                text-decoration: underline !important;
+            }
+            .header_subtitle a:hover {
+                color: white;
+                text-decoration: underline;
+            }
+
+            /* Mobile responsive styles */
+            @media (max-width: 768px) {
+                .header_title {
+                    font-size: 34px !important;
+                }
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <!-- loader -->
+        <div class="loader-wrapper">
+            <div class="loader"></div>
+        </div>
+
+        <!--Start Home-->
+        <section class="home-bg home_side_img" id="home" style="padding-top: 10px;">
+            <div class="container">
+                <div class="row vertical-content">
+                    <div class="col-lg-6">
+                        <div class="text-white">
+                            <div class="dev-title mb-4">
+                              dev<span class="animate">++</span>
+                              <div class="dev-sub-title">for <span class="animate">Business</span></div>
+                            </div>
+                            <h1 class="header_title mx-auto mt-4 mb-0 fw-normal">Automate Your <span class="fw-bold">Workflows</span><br>With <span class="fw-bold">AI</span></h1>
+                            <p class="header_subtitle pt-4 mb-0 pb-2 text-white">
+                              Learn to use Claude and Claude Code to draft documents, analyze data,
+                              automate repetitive tasks, and 10x your team's output — no coding required.
+                              <span class="mt-1"><a href="#faq">Learn more</a></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mt-3">
+                            <div class="demo-container">
+                                <!-- Chat view (shown first) -->
+                                <div class="demo-view chat-window" id="chat-view">
+                                    <div class="chat-header">
+                                        <div class="chat-header-buttons">
+                                            <div class="chat-header-button red"></div>
+                                            <div class="chat-header-button yellow"></div>
+                                            <div class="chat-header-button green"></div>
+                                        </div>
+                                        <div class="chat-header-title">Claude</div>
+                                    </div>
+                                    <div class="chat-messages" id="chat-messages">
+                                        <div class="chat-msg user" id="chat-msg-0">Summarize Q2 sales by region</div>
+                                        <div class="chat-msg claude" id="chat-msg-1"><div class="claude-label">Claude</div>West is up 23%, East +14%. I've broken it down by territory with YoY comparisons. Want me to draft the exec summary?</div>
+                                        <div class="chat-msg user" id="chat-msg-2">Yes, make it board-ready</div>
+                                        <div class="chat-msg claude" id="chat-msg-3"><div class="claude-label">Claude</div>Done — 2 pages with key metrics, regional highlights, and recommendations. I kept the tone concise for the board audience.</div>
+                                        <div class="chat-msg user" id="chat-msg-4">Now review the vendor contract for risks</div>
+                                        <div class="chat-msg claude" id="chat-msg-5"><div class="claude-label">Claude</div>Found 3 liability gaps in sections 4.2, 7.1, and 9.3. I've drafted redline suggestions for each.</div>
+                                    </div>
+                                    <div class="chat-input">
+                                        <input type="text" class="chat-input-field" placeholder="Ask Claude anything..." disabled>
+                                    </div>
+                                </div>
+                                <!-- Terminal view -->
+                                <div class="demo-view terminal hidden" id="terminal-view">
+                                    <div class="terminal-header">
+                                        <div class="terminal-buttons">
+                                            <div class="terminal-button red"></div>
+                                            <div class="terminal-button yellow"></div>
+                                            <div class="terminal-button green"></div>
+                                        </div>
+                                        <div class="terminal-title">~/dev++/business</div>
+                                    </div>
+                                    <div class="terminal-content" id="terminal-content">
+                                        <div id="static-content"></div>
+<span id="typing-line" class="typing-line"></span><span class="cursor" id="cursor"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Home-->
+
+        <!-- Start Feature Highlights -->
+        <section class="section mt-2 mb-0" id="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="about_boxes mt-3 text-center rounded p-4">
+                            <div class="about_icon">
+                                <i class="mdi mdi-file-document-edit text-custom"></i>
+                            </div>
+                            <div class="about_content mt-4">
+                                <h5 class="fw-bold">Automate the Tedious</h5>
+                                <p class="text-muted mb-0 mt-3">Draft emails, summarize reports, and generate documents in seconds instead of hours.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="about_boxes active mt-3 text-center rounded p-4">
+                            <div class="about_icon">
+                                <i class="mdi mdi-chart-line text-custom"></i>
+                            </div>
+                            <div class="about_content mt-4">
+                                <h5 class="fw-bold">Analyze & Decide</h5>
+                                <p class="text-muted mb-0 mt-3">Turn raw data into insights. Let AI surface trends and recommendations you'd miss.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="about_boxes mt-3 text-center rounded p-4">
+                            <div class="about_icon">
+                                <i class="mdi mdi-account-group text-custom"></i>
+                            </div>
+                            <div class="about_content mt-4">
+                                <h5 class="fw-bold">Hands-On Learning</h5>
+                                <p class="text-muted mb-0 mt-3">Apply what you learn directly to your real work, with guidance from people who've done it.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Feature Highlights -->
+
+        <!-- Start User Interest Form -->
+        <section class="section bg-light mt-2" id="interest-form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section_title text-center">
+                            <div class="section_title_icon">
+                                <i class="mdi mdi-account-plus"></i>
+                            </div>
+                            <h3 class="mt-3 text-capitalize fw-bold">Interested in Joining?</h3>
+                            <p class="text-muted section_subtitle mx-auto">Sessions start every 2 weeks. Tell us about yourself and we'll match you with the right cohort.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="mt-3 contact_form bg-gradient mx-auto">
+                            <div id="message"></div>
+                            <form id="interest-form-element" name="interest-form" novalidate>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-2">
+                                            <label for="name" class="text-white">Name *</label>
+                                            <input name="name" id="name" type="text" class="form-control" placeholder="Your name..." required>
+                                            <div class="invalid-feedback">Please enter your name.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-2">
+                                            <label for="email" class="text-white">Email *</label>
+                                            <input name="email" id="email" type="email" class="form-control" placeholder="Your email..." required>
+                                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-2">
+                                            <label for="invite-code" class="text-white">Invite Code (Optional)</label>
+                                            <input name="invite-code" id="invite-code" type="text" class="form-control" placeholder="Enter invite code if you have one...">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group mt-2">
+                                            <label for="role" class="text-white">Role *</label>
+                                            <select name="role" id="role" class="form-control" required>
+                                                <option value="">Select your role...</option>
+                                                <option value="Executive">Executive / C-Suite</option>
+                                                <option value="Product">Product Management</option>
+                                                <option value="Marketing">Marketing</option>
+                                                <option value="Sales">Sales</option>
+                                                <option value="Operations">Operations</option>
+                                                <option value="Finance">Finance</option>
+                                                <option value="HR">HR / People</option>
+                                                <option value="Legal">Legal</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please select your role.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- AI Experience Slider -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group mt-3">
+                                            <label for="ai-experience" class="text-white">AI Experience</label>
+                                            <div class="slider-container">
+                                                <input type="range" class="form-range" id="ai-experience" name="ai-experience" min="1" max="4" value="1">
+                                                <div class="d-flex justify-content-between text-white">
+                                                    <small>Never used</small>
+                                                    <small>Tried a few times</small>
+                                                    <small>Use weekly</small>
+                                                    <small>Use daily</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- What do you want to use AI for? -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group mt-3">
+                                            <label class="text-white">What do you want to use AI for? (Check all that apply)</label>
+                                            <div class="mt-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input use-case-checkbox" type="checkbox" value="writing" id="writing" name="use-cases">
+                                                    <label class="form-check-label text-white" for="writing">
+                                                        Writing & Communications (emails, proposals, reports)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input use-case-checkbox" type="checkbox" value="analysis" id="analysis" name="use-cases">
+                                                    <label class="form-check-label text-white" for="analysis">
+                                                        Data Analysis & Insights (spreadsheets, dashboards, trends)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input use-case-checkbox" type="checkbox" value="research" id="research" name="use-cases">
+                                                    <label class="form-check-label text-white" for="research">
+                                                        Research & Strategy (market research, competitive analysis)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input use-case-checkbox" type="checkbox" value="automation" id="automation" name="use-cases">
+                                                    <label class="form-check-label text-white" for="automation">
+                                                        Process Automation (workflows, scheduling, task management)
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dynamic Comfort Level Sliders -->
+                                <div id="expertise-sections">
+                                    <div class="expertise-group" id="writing-expertise">
+                                        <label class="text-white">Writing & Communications - Comfort Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="writing-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="expertise-group" id="analysis-expertise">
+                                        <label class="text-white">Data Analysis - Comfort Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="analysis-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="expertise-group" id="research-expertise">
+                                        <label class="text-white">Research & Strategy - Comfort Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="research-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="expertise-group" id="automation-expertise">
+                                        <label class="text-white">Process Automation - Comfort Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="automation-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 mt-4 text-end">
+                                        <button type="submit" id="submit" class="btn btn-custom btn-submit">
+                                            Submit Your Interest
+                                            <div class="spinner" id="submit-spinner"></div>
+                                            <i class="mdi mdi-check success-icon" id="success-icon"></i>
+                                            <i class="mdi mdi-alert-circle error-icon" id="error-icon"></i>
+                                        </button>
+                                        <div id="form-message" class="mt-2"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End User Interest Form -->
+
+        <!-- Start FAQ Section -->
+        <section class="section" id="faq">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section_title text-center">
+                            <div class="section_title_icon">
+                                <i class="mdi mdi-help-circle"></i>
+                            </div>
+                            <h3 class="mt-3 text-capitalize fw-bold">Frequently Asked Questions</h3>
+                            <p class="text-muted section_subtitle mx-auto">Everything you need to know about dev++ for Business.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq1">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                        Do I need to know how to code?
+                                    </button>
+                                </h2>
+                                <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        No. This program is designed for business professionals who want to leverage AI without writing code. You'll learn to use Claude through natural conversation — if you can write an email, you can use Claude effectively.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq2">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                        What is Claude Code and why should I care?
+                                    </button>
+                                </h2>
+                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Claude Code is a powerful AI tool that can automate complex tasks — from analyzing spreadsheets to drafting entire documents to building workflows. Think of it as having a tireless assistant who can handle the work you'd normally delegate or spend hours on yourself.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq3">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                        What kind of tasks can I automate?
+                                    </button>
+                                </h2>
+                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Common examples: drafting proposals and reports, summarizing meeting notes, analyzing sales data, creating presentations, writing and responding to emails, building project plans, researching competitors, and automating repetitive workflows. If it involves text or data, Claude can probably help.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq4">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                        How long does each cohort last?
+                                    </button>
+                                </h2>
+                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Each cohort runs for 2 weeks. You'll apply what you learn directly to your real work — not hypothetical exercises. By the end, you'll have automated at least one meaningful workflow and have the skills to keep going.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq5">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                        Is this just another AI tutorial?
+                                    </button>
+                                </h2>
+                                <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        No. Most AI courses teach you what AI can do. We teach you to actually do it — with your real work, in your real role. You'll walk away with workflows you're already using, not a certificate you'll forget about.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq6">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                        I'm already using ChatGPT. How is this different?
+                                    </button>
+                                </h2>
+                                <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="faq6" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Most people use AI chatbots for one-off questions. We'll show you how to use Claude for multi-step workflows, complex analysis, and tasks that save hours per week — not minutes. The difference between casual use and professional mastery is enormous.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq7">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                        What's the time commitment?
+                                    </button>
+                                </h2>
+                                <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="faq7" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Plan for 5-8 hours per week. Since you're applying AI to your actual work, much of this time replaces work you'd be doing anyway — just faster. Most participants find they're saving time by week two.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq8">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                        Is my company data safe?
+                                    </button>
+                                </h2>
+                                <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="faq8" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        We'll teach you best practices for using AI with sensitive information, including what to share, what not to share, and how to get value from AI while respecting your company's data policies. Data hygiene is part of the curriculum.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="faq9">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                                        What happens after the 2 weeks?
+                                    </button>
+                                </h2>
+                                <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="faq9" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        You'll have working AI workflows, the skills to create more, and access to our alumni community. Many participants go on to become the AI champion in their team or department — the person others go to for help.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End FAQ Section -->
+
+        <!-- Start Footer -->
+        <footer class="footer py-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <div class="footer_detail">
+                                <div class="fot_div"></div>
+                                <div>
+                                    <p class="copy-right">
+                                     Built with dev++. <span id="footer-year"></span> &copy;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+        <!-- Javascript -->
+        <script src="../src/static/assets/js/jquery.min.js"></script>
+        <script src="../src/static/assets/js/popper.min.js"></script>
+        <script src="../src/static/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="../src/static/assets/js/jquery.easing.min.js"></script>
+        <script src="../src/static/assets/js/scrollspy.min.js"></script>
+
+        <!-- Owl Js -->
+        <script src="../src/static/assets/js/owl.carousel.min.js"></script>
+
+        <!-- MFP JS -->
+        <script src="../src/static/assets/js/jquery.magnific-popup.min.js"></script>
+
+        <!-- Custom Js   -->
+        <script src="../src/static/assets/js/custom.js"></script>
+
+        <script>
+            // Set footer year
+            var footerYear = new Date().getFullYear();
+            var yearEl = document.getElementById('footer-year');
+            if (yearEl) yearEl.textContent = footerYear;
+
+            // Google Apps Script Web App URL
+            // TODO: Replace with the business-specific Apps Script deployment URL
+            var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYEBSV5Xj_5W6BNfsoGENuzsD9vnrD2gELFxpA0VYPhuNennVH5ocJp6TrY_XhC8l6/exec';
+
+            function submitToGoogleSheets(formData) {
+                var params = new URLSearchParams({
+                    data: JSON.stringify(formData)
+                });
+
+                return fetch(APPS_SCRIPT_URL + '?' + params, {
+                    method: 'GET',
+                    mode: 'cors'
+                })
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    if (data.success) {
+                        return data;
+                    } else {
+                        throw new Error(data.error || 'Unknown error occurred');
+                    }
+                });
+            }
+
+            $(document).ready(function() {
+                // Chat message reveal animation
+                var chatMessages = document.querySelectorAll('.chat-msg');
+                var chatMsgIndex = 0;
+
+                function revealNextChatMessage() {
+                    if (chatMsgIndex < chatMessages.length) {
+                        chatMessages[chatMsgIndex].classList.add('visible');
+                        chatMsgIndex++;
+                        var delay = chatMsgIndex % 2 === 0 ? 1500 : 2000;
+                        setTimeout(revealNextChatMessage, delay);
+                    }
+                }
+
+                setTimeout(revealNextChatMessage, 800);
+
+                // Crossfade between chat and terminal views
+                var chatView = document.getElementById('chat-view');
+                var terminalView = document.getElementById('terminal-view');
+                var showingChat = true;
+                var terminalStarted = false;
+
+                setInterval(function() {
+                    if (showingChat) {
+                        chatView.classList.add('hidden');
+                        terminalView.classList.remove('hidden');
+                        if (!terminalStarted) {
+                            terminalStarted = true;
+                            setTimeout(typeTerminalWorkflow, 500);
+                        }
+                    } else {
+                        terminalView.classList.add('hidden');
+                        chatView.classList.remove('hidden');
+                    }
+                    showingChat = !showingChat;
+                }, 10000);
+
+                // Terminal typing animation - Business AI workflow
+                var terminalSteps = [
+                    { type: 'command', content: '<span class="prompt">$</span> <span class="command">claude</span> <span class="string">"summarize Q2 sales by region"</span>' },
+                    { type: 'response', content: '<span class="comment"># West +23%, East +14%. Full breakdown ready.</span>' },
+                    { type: 'dots', content: '<span class="comment">...</span>' },
+
+                    { type: 'command', content: '<span class="prompt">$</span> <span class="command">claude</span> <span class="string">"draft the exec summary for board"</span>' },
+                    { type: 'response', content: '<span class="comment"># Done. 2 pages with key metrics and recs.</span>' },
+                    { type: 'dots', content: '<span class="comment">...</span>' },
+
+                    { type: 'command', content: '<span class="prompt">$</span> <span class="command">claude</span> <span class="string">"find risks in this vendor contract"</span>' },
+                    { type: 'response', content: '<span class="comment"># Found 3 liability gaps. Redlines attached.</span>' },
+                    { type: 'final', content: '<span class="comment"># Don\'t just learn. <a href=\"#interest-form\">Apply!</a></span>' }
+                ];
+
+                var currentStepIndex = 0;
+                var currentCharIndex = 0;
+                var staticContent = document.getElementById('static-content');
+                var typingLine = document.getElementById('typing-line');
+
+                function typeTerminalWorkflow() {
+                    if (currentStepIndex >= terminalSteps.length) {
+                        return;
+                    }
+
+                    var currentStep = terminalSteps[currentStepIndex];
+                    var textContent = currentStep.content;
+
+                    var tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = textContent;
+                    var plainText = tempDiv.textContent || tempDiv.innerText || '';
+
+                    if (currentCharIndex < plainText.length) {
+                        var textToShow = plainText.substring(0, currentCharIndex + 1);
+
+                        if (currentStep.type === 'command') {
+                            var parts = plainText.split(' ');
+                            var rebuiltContent = '<span class="prompt">$</span>';
+                            var charCount = 1;
+
+                            for (var i = 1; i < parts.length && charCount < textToShow.length; i++) {
+                                if (i === 1) {
+                                    rebuiltContent += ' <span class="command">' + parts[i].substring(0, Math.max(0, textToShow.length - charCount - 1)) + '</span>';
+                                } else {
+                                    var remainingChars = textToShow.length - charCount - 1;
+                                    if (remainingChars > 0) {
+                                        rebuiltContent += ' <span class="string">' + parts.slice(i).join(' ').substring(0, remainingChars) + '</span>';
+                                        break;
+                                    }
+                                }
+                                charCount += parts[i].length + 1;
+                            }
+                            typingLine.innerHTML = rebuiltContent;
+                        } else {
+                            typingLine.innerHTML = '<span class="comment">' + textToShow + '</span>';
+                        }
+
+                        currentCharIndex++;
+                        setTimeout(typeTerminalWorkflow, currentStep.type === 'dots' ? 200 : 80);
+                    } else {
+                        staticContent.innerHTML += textContent + '\n';
+                        typingLine.innerHTML = '';
+                        currentCharIndex = 0;
+                        currentStepIndex++;
+
+                        var delay = currentStep.type === 'final' ? 3000 :
+                                     currentStep.type === 'dots' ? 800 : 1200;
+                        setTimeout(typeTerminalWorkflow, delay);
+                    }
+                }
+
+                // AI experience slider labels
+                var experienceLabels = ['Never used', 'Tried a few times', 'Use weekly', 'Use daily'];
+
+                // Expertise level labels
+                var expertiseLabels = ['Novice', 'Intermediate', 'Expert'];
+
+                // Show/hide expertise sections based on checkbox selection
+                $('.use-case-checkbox').change(function() {
+                    var useCase = $(this).val();
+                    var expertiseSection = $('#' + useCase + '-expertise');
+
+                    if ($(this).is(':checked')) {
+                        expertiseSection.addClass('show');
+                    } else {
+                        expertiseSection.removeClass('show');
+                    }
+                });
+
+                // Form submission
+                $('#interest-form-element').on('submit', function(e) {
+                    e.preventDefault();
+
+                    // Reset previous states
+                    $('.form-control').removeClass('is-invalid');
+                    $('#submit-spinner').removeClass('show');
+                    $('#success-icon').removeClass('show');
+                    $('#error-icon').removeClass('show');
+                    $('#form-message').html('');
+
+                    // Basic validation
+                    var isValid = true;
+
+                    var name = $('#name').val().trim();
+                    var email = $('#email').val().trim();
+                    var role = $('#role').val();
+
+                    if (!name) {
+                        $('#name').addClass('is-invalid');
+                        isValid = false;
+                    }
+
+                    if (!email || !isValidEmail(email)) {
+                        $('#email').addClass('is-invalid');
+                        isValid = false;
+                    }
+
+                    if (!role) {
+                        $('#role').addClass('is-invalid');
+                        isValid = false;
+                    }
+
+                    if (!isValid) {
+                        return;
+                    }
+
+                    // Show spinner
+                    $('#submit-spinner').addClass('show');
+
+                    // Collect form data
+                    var formData = {
+                        source: 'business',
+                        name: name,
+                        email: email,
+                        invite_code: $('#invite-code').val().trim(),
+                        role: role,
+                        ai_experience: experienceLabels[$('#ai-experience').val() - 1],
+                        use_cases: [],
+                        use_case_expertise: {}
+                    };
+
+                    // Collect checked use cases and their expertise levels
+                    $('.use-case-checkbox:checked').each(function() {
+                        var useCase = $(this).val();
+                        formData.use_cases.push($(this).next('label').text().trim());
+
+                        var expertiseSlider = $('input[name="' + useCase + '-expertise"]');
+                        if (expertiseSlider.length) {
+                            formData.use_case_expertise[useCase] = expertiseLabels[expertiseSlider.val() - 1];
+                        }
+                    });
+
+                    // Submit form data to Google Sheets
+                    submitToGoogleSheets(formData)
+                        .then(function(response) {
+                            $('#submit-spinner').removeClass('show');
+                            $('#success-icon').addClass('show');
+                            $('#form-message').html('<div class="alert alert-success">Got it! We will reach out within 48 hours.</div>');
+                            $('#interest-form-element')[0].reset();
+                            $('.expertise-group').removeClass('show');
+                        })
+                        .catch(function(error) {
+                            console.error('Submission error:', error);
+                            $('#submit-spinner').removeClass('show');
+                            $('#error-icon').addClass('show');
+                            $('#form-message').html('<div class="alert alert-danger">Sorry, there was an error submitting your form. Please try again.</div>');
+                        });
+                });
+
+                function isValidEmail(email) {
+                    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return emailRegex.test(email);
+                }
+            });
+        </script>
+
+    </body>
+</html>
