@@ -89,20 +89,27 @@ function appendBusinessSubmission(spreadsheet, data) {
       'Invite Code',
       'Role',
       'AI Experience',
-      'Writing & Communications',
-      'Data Analysis & Insights',
-      'Research & Strategy',
-      'Process Automation',
-      'Writing Expertise',
-      'Analysis Expertise',
-      'Research Expertise',
-      'Automation Expertise'
+      'Uses Claude',
+      'Uses Claude CoWork',
+      'Uses Claude Code',
+      'Uses ChatGPT',
+      'Uses Gemini',
+      'Uses Copilot',
+      'Other Tools',
+      'Claude Expertise',
+      'Claude CoWork Expertise',
+      'Claude Code Expertise',
+      'ChatGPT Expertise',
+      'Gemini Expertise',
+      'Copilot Expertise'
     ];
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
   }
 
-  var useCases = data.use_cases || [];
-  var expertise = data.use_case_expertise || {};
+  var tools = data.ai_tools_used || [];
+  var expertise = data.ai_tool_expertise || {};
+  var knownTools = ['Claude', 'Claude CoWork', 'Claude Code', 'ChatGPT', 'Gemini', 'Copilot'];
+  var otherTools = tools.filter(function(t) { return knownTools.indexOf(t) === -1; });
 
   var rowData = [
     new Date().toISOString(),
@@ -111,14 +118,19 @@ function appendBusinessSubmission(spreadsheet, data) {
     data.invite_code || '',
     data.role || '',
     data.ai_experience || '',
-    useCases.some(function(uc) { return uc.includes('Writing'); }) ? 'Yes' : '',
-    useCases.some(function(uc) { return uc.includes('Data Analysis'); }) ? 'Yes' : '',
-    useCases.some(function(uc) { return uc.includes('Research'); }) ? 'Yes' : '',
-    useCases.some(function(uc) { return uc.includes('Process Automation'); }) ? 'Yes' : '',
-    expertise.writing || '',
-    expertise.analysis || '',
-    expertise.research || '',
-    expertise.automation || ''
+    tools.some(function(t) { return t === 'Claude'; }) ? 'Yes' : '',
+    tools.some(function(t) { return t === 'Claude CoWork'; }) ? 'Yes' : '',
+    tools.some(function(t) { return t === 'Claude Code'; }) ? 'Yes' : '',
+    tools.some(function(t) { return t === 'ChatGPT'; }) ? 'Yes' : '',
+    tools.some(function(t) { return t === 'Gemini'; }) ? 'Yes' : '',
+    tools.some(function(t) { return t === 'Copilot'; }) ? 'Yes' : '',
+    otherTools.join(', '),
+    expertise.claude || '',
+    expertise['claude-cowork'] || '',
+    expertise['claude-code'] || '',
+    expertise.chatgpt || '',
+    expertise.gemini || '',
+    expertise.copilot || ''
   ];
 
   sheet.appendRow(rowData);

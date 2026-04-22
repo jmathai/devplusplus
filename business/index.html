@@ -564,47 +564,52 @@
                                     </div>
                                 </div>
 
-                                <!-- What do you want to use AI for? -->
+                                <!-- AI Tools Used -->
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group mt-3">
-                                            <label class="text-white">What do you want to use AI for? (Check all that apply)</label>
+                                            <label class="text-white">Which AI tools have you used? (Check all that apply)</label>
                                             <div class="mt-2">
                                                 <div class="form-check">
-                                                    <input class="form-check-input use-case-checkbox" type="checkbox" value="writing" id="writing" name="use-cases">
-                                                    <label class="form-check-label text-white" for="writing">
-                                                        Document Generation (proposals, reports, analysis briefs)
-                                                    </label>
+                                                    <input class="form-check-input tool-checkbox" type="checkbox" value="claude" id="claude" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="claude">Claude</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input use-case-checkbox" type="checkbox" value="analysis" id="analysis" name="use-cases">
-                                                    <label class="form-check-label text-white" for="analysis">
-                                                        Data Analysis & Insights (spreadsheets, dashboards, trends)
-                                                    </label>
+                                                    <input class="form-check-input tool-checkbox" type="checkbox" value="claude-cowork" id="claude-cowork" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="claude-cowork">Claude CoWork</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input use-case-checkbox" type="checkbox" value="research" id="research" name="use-cases">
-                                                    <label class="form-check-label text-white" for="research">
-                                                        Research & Strategy (market research, competitive analysis)
-                                                    </label>
+                                                    <input class="form-check-input tool-checkbox" type="checkbox" value="claude-code" id="claude-code" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="claude-code">Claude Code</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input use-case-checkbox" type="checkbox" value="automation" id="automation" name="use-cases">
-                                                    <label class="form-check-label text-white" for="automation">
-                                                        Process Automation (workflows, scheduling, task management)
-                                                    </label>
+                                                    <input class="form-check-input tool-checkbox" type="checkbox" value="chatgpt" id="chatgpt" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="chatgpt">ChatGPT</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input tool-checkbox" type="checkbox" value="gemini" id="gemini" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="gemini">Gemini</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input tool-checkbox" type="checkbox" value="copilot" id="copilot" name="ai-tools">
+                                                    <label class="form-check-label text-white" for="copilot">Copilot</label>
+                                                </div>
+                                                <div class="form-check d-flex align-items-center">
+                                                    <input class="form-check-input tool-checkbox" type="checkbox" value="other" id="other-tool" name="ai-tools">
+                                                    <label class="form-check-label text-white me-2" for="other-tool">Other:</label>
+                                                    <input type="text" class="form-control form-control-sm" id="other-tool-text" name="other-tool-text" placeholder="Which tool?" style="max-width: 200px;" disabled>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Dynamic Comfort Level Sliders -->
+                                <!-- Dynamic Expertise Sliders -->
                                 <div id="expertise-sections">
-                                    <div class="expertise-group" id="writing-expertise">
-                                        <label class="text-white">Document Generation - Comfort Level</label>
+                                    <div class="expertise-group" id="claude-expertise">
+                                        <label class="text-white">Claude - Expertise Level</label>
                                         <div class="slider-container">
-                                            <input type="range" class="form-range expertise-slider" name="writing-expertise" min="1" max="3" value="1">
+                                            <input type="range" class="form-range expertise-slider" name="claude-expertise" min="1" max="3" value="1">
                                             <div class="d-flex justify-content-between text-white">
                                                 <small>Novice</small>
                                                 <small>Intermediate</small>
@@ -613,10 +618,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="expertise-group" id="analysis-expertise">
-                                        <label class="text-white">Data Analysis - Comfort Level</label>
+                                    <div class="expertise-group" id="claude-cowork-expertise">
+                                        <label class="text-white">Claude CoWork - Expertise Level</label>
                                         <div class="slider-container">
-                                            <input type="range" class="form-range expertise-slider" name="analysis-expertise" min="1" max="3" value="1">
+                                            <input type="range" class="form-range expertise-slider" name="claude-cowork-expertise" min="1" max="3" value="1">
                                             <div class="d-flex justify-content-between text-white">
                                                 <small>Novice</small>
                                                 <small>Intermediate</small>
@@ -625,10 +630,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="expertise-group" id="research-expertise">
-                                        <label class="text-white">Research & Strategy - Comfort Level</label>
+                                    <div class="expertise-group" id="claude-code-expertise">
+                                        <label class="text-white">Claude Code - Expertise Level</label>
                                         <div class="slider-container">
-                                            <input type="range" class="form-range expertise-slider" name="research-expertise" min="1" max="3" value="1">
+                                            <input type="range" class="form-range expertise-slider" name="claude-code-expertise" min="1" max="3" value="1">
                                             <div class="d-flex justify-content-between text-white">
                                                 <small>Novice</small>
                                                 <small>Intermediate</small>
@@ -637,10 +642,34 @@
                                         </div>
                                     </div>
 
-                                    <div class="expertise-group" id="automation-expertise">
-                                        <label class="text-white">Process Automation - Comfort Level</label>
+                                    <div class="expertise-group" id="chatgpt-expertise">
+                                        <label class="text-white">ChatGPT - Expertise Level</label>
                                         <div class="slider-container">
-                                            <input type="range" class="form-range expertise-slider" name="automation-expertise" min="1" max="3" value="1">
+                                            <input type="range" class="form-range expertise-slider" name="chatgpt-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="expertise-group" id="gemini-expertise">
+                                        <label class="text-white">Gemini - Expertise Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="gemini-expertise" min="1" max="3" value="1">
+                                            <div class="d-flex justify-content-between text-white">
+                                                <small>Novice</small>
+                                                <small>Intermediate</small>
+                                                <small>Expert</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="expertise-group" id="copilot-expertise">
+                                        <label class="text-white">Copilot - Expertise Level</label>
+                                        <div class="slider-container">
+                                            <input type="range" class="form-range expertise-slider" name="copilot-expertise" min="1" max="3" value="1">
                                             <div class="d-flex justify-content-between text-white">
                                                 <small>Novice</small>
                                                 <small>Intermediate</small>
@@ -963,14 +992,19 @@
                 var expertiseLabels = ['Novice', 'Intermediate', 'Expert'];
 
                 // Show/hide expertise sections based on checkbox selection
-                $('.use-case-checkbox').change(function() {
-                    var useCase = $(this).val();
-                    var expertiseSection = $('#' + useCase + '-expertise');
+                $('.tool-checkbox').change(function() {
+                    var tool = $(this).val();
+                    var expertiseSection = $('#' + tool + '-expertise');
 
                     if ($(this).is(':checked')) {
                         expertiseSection.addClass('show');
                     } else {
                         expertiseSection.removeClass('show');
+                    }
+
+                    // Enable/disable Other text input
+                    if (tool === 'other') {
+                        $('#other-tool-text').prop('disabled', !$(this).is(':checked'));
                     }
                 });
 
@@ -1022,18 +1056,25 @@
                         invite_code: $('#invite-code').val().trim(),
                         role: role,
                         ai_experience: experienceLabels[$('#ai-experience').val() - 1],
-                        use_cases: [],
-                        use_case_expertise: {}
+                        ai_tools_used: [],
+                        ai_tool_expertise: {}
                     };
 
-                    // Collect checked use cases and their expertise levels
-                    $('.use-case-checkbox:checked').each(function() {
-                        var useCase = $(this).val();
-                        formData.use_cases.push($(this).next('label').text().trim());
+                    // Collect checked tools and their expertise levels
+                    $('.tool-checkbox:checked').each(function() {
+                        var tool = $(this).val();
+                        if (tool === 'other') {
+                            var otherText = $('#other-tool-text').val().trim();
+                            if (otherText) {
+                                formData.ai_tools_used.push(otherText);
+                            }
+                        } else {
+                            formData.ai_tools_used.push($(this).next('label').text().trim());
 
-                        var expertiseSlider = $('input[name="' + useCase + '-expertise"]');
-                        if (expertiseSlider.length) {
-                            formData.use_case_expertise[useCase] = expertiseLabels[expertiseSlider.val() - 1];
+                            var expertiseSlider = $('input[name="' + tool + '-expertise"]');
+                            if (expertiseSlider.length) {
+                                formData.ai_tool_expertise[tool] = expertiseLabels[expertiseSlider.val() - 1];
+                            }
                         }
                     });
 
