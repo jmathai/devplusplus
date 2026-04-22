@@ -607,8 +607,10 @@
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input tool-checkbox" type="checkbox" value="other" id="other-tool" name="ai-tools">
-                                                    <label class="form-check-label text-white" for="other-tool">Other:</label>
-                                                    <input type="text" class="form-control form-control-sm d-inline-block ms-2" id="other-tool-text" name="other-tool-text" placeholder="Which tool?" style="max-width: 200px; vertical-align: middle;" disabled>
+                                                    <label class="form-check-label text-white" for="other-tool">Other</label>
+                                                </div>
+                                                <div id="other-tool-wrapper" style="display: none; padding-left: 1.5em;">
+                                                    <input type="text" class="form-control form-control-sm" id="other-tool-text" name="other-tool-text" placeholder="Which tool?" style="max-width: 200px;" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -1015,9 +1017,11 @@
                         expertiseSection.removeClass('show');
                     }
 
-                    // Enable/disable Other text input
+                    // Show/hide Other text input
                     if (tool === 'other') {
-                        $('#other-tool-text').prop('disabled', !$(this).is(':checked'));
+                        var checked = $(this).is(':checked');
+                        $('#other-tool-wrapper').toggle(checked);
+                        $('#other-tool-text').prop('disabled', !checked);
                     }
                 });
 
