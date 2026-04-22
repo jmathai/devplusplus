@@ -531,28 +531,10 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="form-group mt-2">
                                             <label for="invite-code" class="text-white">Invite Code (Optional)</label>
                                             <input name="invite-code" id="invite-code" type="text" class="form-control" placeholder="Enter invite code if you have one...">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group mt-2">
-                                            <label for="role" class="text-white">Role *</label>
-                                            <select name="role" id="role" class="form-control" required>
-                                                <option value="">Select your role...</option>
-                                                <option value="Executive">Executive / C-Suite</option>
-                                                <option value="Product">Product Management</option>
-                                                <option value="Marketing">Marketing</option>
-                                                <option value="Sales">Sales</option>
-                                                <option value="Operations">Operations</option>
-                                                <option value="Finance">Finance</option>
-                                                <option value="HR">HR / People</option>
-                                                <option value="Legal">Legal</option>
-                                                <option value="Other">Other</option>
-                                            </select>
-                                            <div class="invalid-feedback">Please select your role.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1041,8 +1023,6 @@
 
                     var name = $('#name').val().trim();
                     var email = $('#email').val().trim();
-                    var role = $('#role').val();
-
                     if (!name) {
                         $('#name').addClass('is-invalid');
                         isValid = false;
@@ -1050,11 +1030,6 @@
 
                     if (!email || !isValidEmail(email)) {
                         $('#email').addClass('is-invalid');
-                        isValid = false;
-                    }
-
-                    if (!role) {
-                        $('#role').addClass('is-invalid');
                         isValid = false;
                     }
 
@@ -1072,7 +1047,6 @@
                         name: name,
                         email: email,
                         invite_code: $('#invite-code').val().trim(),
-                        role: role,
                         ai_experience: experienceLabels[$('#ai-experience').val() - 1],
                         ai_tools_used: [],
                         ai_tool_expertise: {}
