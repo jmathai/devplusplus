@@ -408,10 +408,11 @@
                                     </div>
                                     <div class="chat-messages" id="chat-messages">
                                         <div class="chat-msg user" id="chat-msg-0">Summarize Q2 sales by region</div>
-                                        <div class="chat-msg claude" id="chat-msg-1"><div class="claude-label">Claude</div>Connecting to BigQuery for sales data...</div>
-                                        <div class="chat-msg claude" id="chat-msg-2"><div class="claude-label">Claude</div>West is up 23%, East +14%. I've broken it down by territory with YoY comparisons. Want me to draft the exec summary?</div>
-                                        <div class="chat-msg user" id="chat-msg-3">Now review the vendor contract for risks</div>
-                                        <div class="chat-msg claude" id="chat-msg-4"><div class="claude-label">Claude</div>Found 3 liability gaps in sections 4.2, 7.1, and 9.3. I've drafted redline suggestions for each.</div>
+                                        <div class="chat-msg claude" id="chat-msg-1"><div class="claude-label">Claude</div>Looking for Skills and MCPs...</div>
+                                        <div class="chat-msg claude" id="chat-msg-2"><div class="claude-label">Claude</div>Found sales data in BigQuery...</div>
+                                        <div class="chat-msg claude" id="chat-msg-3"><div class="claude-label">Claude</div>West is up 23%, East +14%. I've broken it down by territory with YoY comparisons.</div>
+                                        <div class="chat-msg user" id="chat-msg-4">Now review the vendor contract for risks</div>
+                                        <div class="chat-msg claude" id="chat-msg-5"><div class="claude-label">Claude</div>Found 3 liability gaps in sections 4.2, 7.1, and 9.3. I've drafted redline suggestions for each.</div>
                                     </div>
                                     <div class="chat-input">
                                         <input type="text" class="chat-input-field" placeholder="Ask Claude anything..." disabled>
@@ -914,11 +915,9 @@
                 // Terminal typing animation - Business AI workflow
                 var terminalSteps = [
                     { type: 'command', content: '<span class="prompt">$</span> <span class="command">claude</span> <span class="string">"summarize Q2 sales by region"</span>' },
+                    { type: 'response', content: '<span class="comment"># Looking for Skills and MCPs...</span>' },
+                    { type: 'response', content: '<span class="comment"># Found sales data in BigQuery...</span>' },
                     { type: 'response', content: '<span class="comment"># West +23%, East +14%. Full breakdown ready.</span>' },
-                    { type: 'dots', content: '<span class="comment">...</span>' },
-
-                    { type: 'command', content: '<span class="prompt">$</span> <span class="command">claude</span> <span class="string">"draft the exec summary for board"</span>' },
-                    { type: 'response', content: '<span class="comment"># Done. 2 pages with key metrics and recs.</span>' },
                     { type: 'dots', content: '<span class="comment">...</span>' },
 
                     { type: 'command', content: '<span class="prompt">$</span> <span class="command">claude</span> <span class="string">"find risks in this vendor contract"</span>' },
