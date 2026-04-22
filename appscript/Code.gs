@@ -38,7 +38,7 @@ function getOrCreateSheet(spreadsheet, sheetName) {
 }
 
 function appendDefaultSubmission(spreadsheet, data) {
-  var sheet = getOrCreateSheet(spreadsheet, 'Sheet1');
+  var sheet = getOrCreateSheet(spreadsheet, 'Developers');
 
   if (sheet.getLastRow() === 0) {
     var headers = [
